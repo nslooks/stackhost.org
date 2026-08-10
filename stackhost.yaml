@@ -1,8 +1,10 @@
 runtime:
   image: node:22
 
-build: "npm install"
-start: "npm run start"
+commands:
+  build: "npm install"
+  start: "npm run start"
+
 port: 8088
 branch: main
 auto_deploy: true
