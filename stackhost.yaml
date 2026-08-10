@@ -1,5 +1,5 @@
 image: node:22
-package: ""          # 依赖管理
-start: "npm run start"
+package: "axios"          # 依赖管理
+start: "node index.js"
 branch: main
 auto_deploy: true
