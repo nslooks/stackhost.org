@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSphere — Preserving Earth for Tomorrow</title>
+    <style>
+        :root {
+            --primary-green: #1b4332;
+            --accent-green: #2d6a4f;
+            --light-green: #52b788;
+            --bright-green: #74c69d;
+            --soft-mint: #d8f3dc;
+            --bg-light: #f4f9f5;
+            --text-dark: #1f2937;
+            --text-muted: #4b5563;
+            --text-light: #ffffff;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 5%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--accent-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-green);
+            color: var(--text-light);
+            box-shadow: 0 4px 14px rgba(45, 106, 79, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 1.5rem 4rem;
+            background: linear-gradient(180deg, rgba(15, 32, 23, 0.55) 0%, rgba(27, 67, 50, 0.75) 100%),
+                        url('https://images.unsplash.com/photo-1511497584788-876761c119ef?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+            color: var(--text-light);
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(216, 243, 220, 0.2);
+            border: 1px solid rgba(116, 198, 157, 0.5);
+            border-radius: 30px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.25rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Stats Bar */
+        .stats-section {
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+            padding: 0 5%;
+        }
+
+        .stats-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Sections General */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header span {
+            color: var(--accent-green);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            color: var(--primary-green);
+            font-weight: 800;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Pillars / Features */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .pillar-card {
+            background: #ffffff;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow);
+            border-color: var(--bright-green);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            background-color: var(--soft-mint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--accent-green);
+        }
+
+        .icon-box svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Large Feature Showcase */
+        .feature-showcase {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 100%);
+            border-radius: 28px;
+            overflow: hidden;
+            color: var(--text-light);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            align-items: center;
+            margin: 4rem 5%;
+        }
+
+        .feature-image {
+            height: 100%;
+            min-height: 380px;
+            background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+        }
+
+        .feature-content {
+            padding: 4rem 3rem;
+        }
+
+        .feature-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            line-height: 1.25;
+        }
+
+        .feature-content p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        /* How to Get Involved */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .step-card {
+            position: relative;
+            padding-left: 3.5rem;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: var(--soft-mint);
+            color: var(--accent-green);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.2rem;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Call to Action Banner */
+        .cta-section {
+            background-color: var(--soft-mint);
+            text-align: center;
+            padding: 5rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .cta-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .cta-container h2 {
+            font-size: 2.25rem;
+            color: var(--primary-green);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-container p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 480px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 240px;
+            padding: 0.85rem 1.25rem;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--accent-green);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-green);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col ul a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul a:hover {
+            color: var(--bright-green);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .feature-content { padding: 2.5rem 1.5rem; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M17,8C8,10 59,16.17 3.82,21.34L5.71,22L6.66,19.7C12,14.7 18,12 22,12C22,7 19,3 12,2C11.67,3.33 11.23,4.67 10.66,6C12.83,6.33 15,7 17,8Z"/>
+            </svg>
+            EcoSphere
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#pillars">Pillars</a></li>
+            <li><a href="#impact">Impact</a></li>
+            <li><a href="#action">Get Involved</a></li>
+        </ul>
+        <a href="#join" class="btn btn-primary">Take Action</a>
+    </nav>
+
+    <!-- Large Hero Banner Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">🌱 Preserving Earth Together</div>
+            <h1>Building a Sustainable Future for Generations to Come</h1>
+            <p>EcoSphere empowers global communities through forest restoration, renewable energy advancement, and ocean cleanup initiatives. Every small action builds our green tomorrow.</p>
+            <div class="hero-buttons">
+                <a href="#action" class="btn btn-primary">Join the Movement</a>
+                <a href="#pillars" class="btn btn-secondary">Explore Projects</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Impact Stats Bar -->
+    <section class="stats-section" id="impact">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>4.2M+</h3>
+                <p>Trees Planted Worldwide</p>
+            </div>
+            <div class="stat-item">
+                <h3>210</h3>
+                <p>Tons Plastic Removed</p>
+            </div>
+            <div class="stat-item">
+                <h3>680+</h3>
+                <p>Clean Energy Hubs</p>
+            </div>
+            <div class="stat-item">
+                <h3>120K</h3>
+                <p>Active Eco Volunteers</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Pillars Section -->
+    <section class="section" id="pillars">
+        <div class="section-header">
+            <span>Our Core Focus</span>
+            <h2>How We Drive Environmental Change</h2>
+            <p>Targeting key ecological frontiers through direct grassroots action and systemic technological innovation.</p>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.09,8.59L17.5,10L11,16.5Z"/></svg>
+                </div>
+                <h3>Reforestation</h3>
+                <p>Restoring degraded native ecosystems, nurturing tree nurseries, and rebuilding critical biodiversity corridors for wildlife.</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/></svg>
+                </div>
+                <h3>Clean Energy</h3>
+                <p>Accelerating the worldwide transition toward zero-emission solar, wind, and sustainable community energy microgrids.</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A9,9 0 0,0 21,12A9,9 0 0,0 12,3M12,19A7,7 0 0,1 5,12A7,7 0 0,1 12,5A7,7 0 0,1 19,12A7,7 0 0,1 12,19Z"/></svg>
+                </div>
+                <h3>Ocean Conservation</h3>
+                <p>Protecting marine habitats, enforcing single-use plastic reduction, and running global coastal shoreline cleanups.</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>
+                </div>
+                <h3>Circular Living</h3>
+                <p>Promoting zero-waste lifestyle choices, sustainable agriculture practices, and urban composting initiatives.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase Banner -->
+    <div class="feature-showcase" id="about">
+        <div class="feature-image"></div>
+        <div class="feature-content">
+            <h2>"The earth is what we all have in common."</h2>
+            <p>Our mission is not merely protecting wild spaces, but restoring the delicate harmony between human progress and planetary boundaries. Together, we turn climate anxiety into impactful climate action.</p>
+            <a href="#action" class="btn btn-secondary">Discover Our Mission</a>
+        </div>
+    </div>
+
+    <!-- Action Steps -->
+    <section class="section" id="action">
+        <div class="section-header">
+            <span>Get Started</span>
+            <h2>Three Ways You Can Help Today</h2>
+            <p>Individual effort compounds into monumental transformation. Here is how you can begin.</p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Reduce Your Footprint</h3>
+                <p>Adopt zero-waste habits, shift toward plant-forward diets, and minimize single-use plastics in daily life.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Volunteer Locally</h3>
+                <p>Participate in weekend tree planting activities, riverbank cleanups, or local community garden stewardship.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Support Verified Projects</h3>
+                <p>Contribute directly to high-impact habitat restoration projects backed by ecological science and transparency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="cta-section" id="join">
+        <div class="cta-container">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Subscribe to our monthly EcoSphere Briefing for environmental tips, project updates, and volunteer opportunities near you.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>EcoSphere</h4>
+                <p>An international non-profit dedicated to nature conservation, habitat restoration, and sustainable living.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#pillars">Key Pillars</a></li>
+                    <li><a href="#impact">Our Impact</a></li>
+                    <li><a href="#action">Get Involved</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="#">Reforestation Project</a></li>
+                    <li><a href="#">Ocean Guard Patrol</a></li>
+                    <li><a href="#">Clean Energy Grid</a></li>
+                    <li><a href="#">Youth Eco Leadership</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>hello@ecosphere-planet.org</p>
+                <p>+1 (800) 555-0199</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 EcoSphere Foundation. All rights reserved.</p>
+            <p>Designed for a Greener Tomorrow 🌱</p>
+        </div>
+    </footer>
+
+</body>
+</html>
