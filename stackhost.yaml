@@ -1,5 +1,6 @@
 image: node:22
-package: "axios"          # 依赖管理
-start: "node index.js"
+build: "npm install"
+start: "npm run start"
+port: 8088
 branch: main
 auto_deploy: true
